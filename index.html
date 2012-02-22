@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>Cita SERGAS</title>
+
+        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+        <script type="text/javascript" src="assets/jquery/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="assets/jquery/jquery.mobile-1.0.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="assets/jquery/jquery.mobile-1.0.min.css" />
+
+        <script type="text/javascript" src="assets/main.js"></script>
+
+    </head>
+
+    <body>
+
+        <div data-role="page" id="inicio">
+
+            <div data-role="header">
+                <h1>Cita SERGAS</h1>
+                <div class="ui-body ui-body-b">
+                    <a onClick="newCard();" data-role="button">Nova tarxeta</a>
+                </div>
+            </div>
+
+            <div data-role="content">
+                <ul data-role="listview" id="lista"></ul>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="solicitude_cita">
+
+            <div data-role="header">
+                <h1>Solicitude de cita</h1>
+            </div>
+
+            <div data-role="content">
+                <label for="medico">Medico</label><input id="medico" disabled="true" />
+                <label for="centro">Centro</label><input id="centro" disabled="true" />
+
+                <label for="tipo">Tipo de cita</label>
+                <select id="tipo" onChange="updateDays();">
+                    <option value="1" selected="selected">Consulta por Enfermidade</option>
+                    <option value="2">Consulta para Receitas</option>
+                </select>
+
+                <label for="dia">Dia</label><select id="dia"></select>
+
+                <label for="rango">Rango</label><input id="rango" disabled="true" />
+                <label for="alerta">Alerta</label><input id="alerta" disabled="true" />
+                <label for="hora">Hora</label><input id="hora" value="00" />
+                <label for="minutos">Minutos</label><input id="minutos" value="00" />
+
+                <a onClick="requestAppointment();" data-role="button">Solicitar</a>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="confirmar_cita">
+
+            <div data-role="header">
+                <h1>Confirmar cita</h1>
+            </div>
+
+            <div data-role="content">
+                <label for="medico2">Medico</label><input id="medico2" disabled="true" />
+                <label for="centro2">Centro</label><input id="centro2" disabled="true" />
+                <label for="dia2">Dia</label><input id="dia2" disabled="true" />
+
+                <label for="hora2">Hora</label><select id="hora2"></select>
+
+                <a onClick="confirmAppointment();" data-role="button">Confirmar</a>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="editar_tarxeta">
+
+            <div data-role="header">
+                <h1>Editar tarxeta</h1>
+            </div>
+
+            <div data-role="content">
+                <label for="alias">Alias tarxeta</label><input id="alias" type="text" />
+
+                <label for="t_fecha">Data de nacemento</label><input id="t_fecha" type="text" maxlength="6" />
+                <label for="t_apellidos1">Iniciais 1</label><input id="t_apellidos1" type="text" maxlength="2" />
+                <label for="t_apellidos2">Iniciais 2</label><input id="t_apellidos2" type="text" maxlength="2" />
+                <label for="t_sexo">Sexo</label><input id="t_sexo" type="text" maxlength="1" />
+                <label for="t_control">Control</label><input id="t_control" type="text" maxlength="3" />
+
+                <label for="n_cabecera">Cabeciera SS</label><input id="n_cabecera" type="text" maxlength="2" />
+                <label for="n_cuerpo">Corpo SS</label><input id="n_cuerpo" type="text" maxlength="10" />
+
+                <a onClick="saveCard();" data-role="button">Gardar</a>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

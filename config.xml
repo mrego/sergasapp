@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+    xmlns:gap="http://phonegap.com/ns/1.0"
+    id="com.igalia.rego.phonegap.citasergas"
+    version="0.0.1">
+
+    <name>Cita SERGAS</name>
+
+    <description>
+        Aplicación que permite a solicitude de citas médicas no SERGAS
+        (Servizo Galego de Saúde).
+    </description>
+
+    <author href="http://blogs.igalia.com/mrego/" email="rego@igalia.com">
+        Manuel Rego Casasnovas
+    </author>
+
+    <icon src="icon.png" gap:role="default" />
+
+    <feature name="http://api.phonegap.com/1.0/network" />
+</widget>
