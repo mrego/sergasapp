@@ -4,7 +4,7 @@
     id="com.igalia.rego.phonegap.citasergas"
     version="0.0.1">
 
-    <name>Cita SERGAS</name>
+    <name>SergasApp</name>
 
     <description>
         Aplicación que permite a solicitude de citas médicas no SERGAS (Servizo Galego de Saúde).

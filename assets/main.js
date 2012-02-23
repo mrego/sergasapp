@@ -1,5 +1,5 @@
 /*
- * Cita SERGAS
+ * SergasApp
  *
  * Copyright (C) 2012  Manuel Rego Casasnovas <rego@igalia.com>
  *

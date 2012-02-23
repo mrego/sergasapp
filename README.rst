@@ -1,10 +1,10 @@
-Cita SERGAS
-===========
+SergasApp
+=========
 
 Descrición
 ----------
 
-**Cita SERGAS** é unha pequena aplicación para a solicitude de citas médicas no
+**SergasApp** é unha pequena aplicación para a solicitude de citas médicas no
 SERGAS (Servizo Galego de Saúde).
 
 A aplicación atópase nun *estado experimental* e tan só está dispoñible a opción
@@ -16,7 +16,7 @@ A aplicación está desenvolvida utilizando `PhoneGap <http://phonegap.com/>`_ e
 Licenza
 -------
 
-**Cita SERGAS** está publicado baixo os termos da *Licenza Pública Xeral de GNU
+**SergasApp** está publicado baixo os termos da *Licenza Pública Xeral de GNU
 versión 3* (`GNU General Public License version 3
 <http://www.gnu.org/copyleft/gpl.html>`_).
 
