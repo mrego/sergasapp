@@ -21,7 +21,7 @@ versión 3* (`GNU General Public License version 3
 <http://www.gnu.org/copyleft/gpl.html>`_).
 
 O código fonte está dispoñible no seguinte repositorio Git:
-https://github.com/mrego/Cita-SERGAS
+http://github.com/mrego/sergasapp
 
 Autores
 -------
