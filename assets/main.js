@@ -22,6 +22,12 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // URL base da aplicación de citas do SERGAS
 var BASE_URL = "https://extranet.sergas.es/cita/"
 
+// Número máximo de veces que se intenta facer a conexión
+var MAX_CALLS = 3;
+
+// Contador de intentos de conexión
+var calls = 0;
+
 // Referencia á base de datos
 var db;
 
@@ -114,7 +120,7 @@ function createLiCard(index) {
 function createUlCardOperations(index) {
     var ul = $(document.createElement("ul"));
     ul.append($(document.createElement("li")).html(
-            "<a onClick='appointment(" + index + ");'>Solicitar cita</a>"));
+            "<a onClick='initAppointment(" + index + ");'>Solicitar cita</a>"));
     ul.append($(document.createElement("li")).html(
             "<a onClick='editCard(" + index + ");'>Editar tarxeta</a>"));
     ul.append($(document.createElement("li")).html(
@@ -122,18 +128,18 @@ function createUlCardOperations(index) {
     return ul;
 }
 
-function appointment(index) {
-    appointment(index, false);
+function initAppointment(index) {
+    calls = 0;
+    appointment(index);
 }
 
 /*
  * Esta función e necesario chamala dúas veces, xa que moitas veces a primeira
  * fallan as peticións.
  *
- * Por iso se engadiu o segundo parametro que permite saber se se está chamando
- * ou non a función por segunda vez.
+ * Por iso se utiliza a variable "calls" que conta os intentos de conexión.
  */
-function appointment(index, secondTime) {
+function appointment(index) {
     $.mobile.showPageLoadingMsg();
 
     console.log("Appointment: " + cards[index].id + " Alias: " + cards[index].alias);
@@ -169,6 +175,18 @@ function appointment(index, secondTime) {
     // Petición por post que simula encher o formulario cos datos da tarxeta
     $.post(BASE_URL + "paso3.asp", values,
         function(data) {
+
+            if ($("#menuOperaciones", data).text()) {
+                console.log("Pantalla inicial intento " + calls);
+                if (calls < MAX_CALLS) {
+                    console.log("Volver a intentar");
+                    calls++;
+                    appointment(index);
+                    return;
+                }
+                console.log("Non máis intentos");
+            }
+
             if ($(".p_cita_a", data).length) {
                 $.mobile.hidePageLoadingMsg();
 
@@ -201,17 +219,9 @@ function appointment(index, secondTime) {
 
                 fillDays();
             } else {
-                // Neste caso houbo algún erro
-                if (secondTime) {
-                    // Se xa é o segundo intento amósase o erro
-                    $.mobile.hidePageLoadingMsg();
-                    alert("Houbo un erro durante a solicitude de cita.\n" +
-                            "Revise os datos da tarxeta sanitaria e intenteo de novo mais tarde");
-                } else {
-                    // Se é a primeira vez volve intentarse xa que moitas veces
-                    // non funciona a primeira
-                    appointment(index, true);
-                }
+                $.mobile.hidePageLoadingMsg();
+                alert("Houbo un erro durante a solicitude de cita.\n" +
+                        "Revise os datos da tarxeta sanitaria e intenteo de novo mais tarde");
             }
 
         }
