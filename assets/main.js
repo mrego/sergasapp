@@ -20,7 +20,7 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // URL base da aplicación de citas do SERGAS
-var baseURL = "https://extranet.sergas.es/cita/"
+var BASE_URL = "https://extranet.sergas.es/cita/"
 
 // Referencia á base de datos
 var db;
@@ -139,11 +139,11 @@ function appointment(index, secondTime) {
     console.log("Appointment: " + cards[index].id + " Alias: " + cards[index].alias);
 
     // Hai que facer as peticións por GET para que a aplicación non falle
-    $.get(baseURL + "inicioCI.asp", null,
+    $.get(BASE_URL + "inicioCI.asp", null,
             function(data) {
             }
         );
-    $.get(baseURL + "paso2.asp?T=S", null,
+    $.get(BASE_URL + "paso2.asp?T=S", null,
             function(data) {
             }
         );
@@ -167,7 +167,7 @@ function appointment(index, secondTime) {
     console.log("t_sexo: " + values.t_sexo);
 
     // Petición por post que simula encher o formulario cos datos da tarxeta
-    $.post(baseURL + "paso3.asp", values,
+    $.post(BASE_URL + "paso3.asp", values,
         function(data) {
             if ($(".p_cita_a", data).length) {
                 $.mobile.hidePageLoadingMsg();
@@ -315,7 +315,7 @@ function requestAppointment() {
 
     $.mobile.showPageLoadingMsg();
 
-    $.get(baseURL + "paso5.asp", values,
+    $.get(BASE_URL + "paso5.asp", values,
         function(data) {
             $.mobile.hidePageLoadingMsg();
 
@@ -387,7 +387,7 @@ function confirmAppointment() {
 
     $.mobile.showPageLoadingMsg();
 
-    $.get(baseURL + "paso6.asp", values,
+    $.get(BASE_URL + "paso6.asp", values,
         function(data) {
             $.mobile.hidePageLoadingMsg();
 
