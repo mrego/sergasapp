@@ -331,10 +331,20 @@ function requestAppointment() {
 
             if ($(".p_cita_az", data).length) {
                 var message = $(".p_cita_az", data).eq(0).text() + "\n" +
-                        $(".p_cita_az", data).eq(2).text() + "\n\n" +
+                        $(".p_cita_az", data).eq(2).text() + "\n\n";
+
+                if ($(".p_cita", data).length == 11) {
+                    message +=
+                            "Medico: " + $(".p_cita", data).eq(3).find("strong").text() + "\n" +
+                            "Data: " + $(".p_cita", data).eq(5).find("b").text() + "\n" +
+                            "Hora: " + $(".p_cita", data).eq(7).find("strong").text();
+                } else {
+                    message +=
                         "Medico: " + $(".p_cita", data).eq(3).find("strong").text() + "\n" +
-                        "Data: " + $(".p_cita", data).eq(5).find("b").text() + "\n" +
-                        "Hora: " + $(".p_cita", data).eq(7).find("strong").text();
+                        "Substituindo a: " + $(".p_cita", data).eq(5).find("strong").text() + "\n" +
+                        "Data: " + $(".p_cita", data).eq(7).find("b").text() + "\n" +
+                        "Hora: " + $(".p_cita", data).eq(9).find("strong").text();
+                }
                 alert(message);
 
                 $.mobile.changePage("#inicio");
@@ -375,12 +385,20 @@ function fillHours() {
     var hora = $("#hora2");
     hora.empty();
 
+    hora.change(showHourInfo);
+
     for (var i = 0; i < hours.length; i++) {
-        if (i == selectedHour) {
-            hora.append("<option selected='selected' value='" + i + "'>" + hours[i][0] +"</option>");
-        } else {
-            hora.append("<option value='" + i + "'>" + hours[i][0] +"</option>");
-        }
+        hora.append("<option value='" + i + "'>" + hours[i][0] +"</option>");
+    }
+
+    hora.select(selectedHour);
+}
+
+function showHourInfo() {
+    if (days[$("#dia").val()][10] == 1) {
+        var i = $("#hora2").val();
+        $("#substituto2").val(hours[i][2]);
+        $("#centro2").val(hours[i][4]);
     }
 }
 
