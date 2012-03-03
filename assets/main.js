@@ -220,8 +220,12 @@ function appointment(index) {
                 fillDays();
             } else {
                 $.mobile.hidePageLoadingMsg();
-                alert("Houbo un erro durante a solicitude de cita.\n" +
-                        "Revise os datos da tarxeta sanitaria e inténteo de novo máis tarde");
+                navigator.notification.alert(
+                        "Revise os datos da tarxeta sanitaria e inténteo de novo máis tarde",
+                        null,
+                        "Erro durante a solicitude",
+                        "Aceptar"
+                    );
             }
 
         }
@@ -345,7 +349,12 @@ function requestAppointment() {
                         "Data: " + $(".p_cita", data).eq(7).find("b").text() + "\n" +
                         "Hora: " + $(".p_cita", data).eq(9).find("strong").text();
                 }
-                alert(message);
+                navigator.notification.alert(
+                        message,
+                        null,
+                        "Xa ten algunha cita",
+                        "Aceptar"
+                    );
 
                 $.mobile.changePage("#inicio");
             } else {
@@ -420,9 +429,19 @@ function confirmAppointment() {
             $.mobile.hidePageLoadingMsg();
 
             if ($(".p_cita_a", data).eq(1).text() == "") {
-                alert("Erro confirmando a cita, por favor inténteo de novo");
+                navigator.notification.alert(
+                        "Por favor inténteo de novo",
+                        null,
+                        "Erro confirmando a cita",
+                        "Aceptar"
+                    );
             } else {
-                alert($(".p_cita_a", data).eq(1).text());
+                navigator.notification.alert(
+                        $(".p_cita_a", data).eq(1).text(),
+                        null,
+                        "Cita confirmada",
+                        "Aceptar"
+                    );
             }
 
             $.mobile.changePage("#inicio");
@@ -497,9 +516,18 @@ function newCard() {
 }
 
 function removeCard(index) {
-    if (confirm("¿Eliminar tarxeta \"" + cards[index].alias + "\"?")) {
-        selectedCard = index;
+    selectedCard = index;
 
+    navigator.notification.confirm(
+            "¿Está seguro?",
+            onConfirmRemoveCard,
+            "Eliminar tarxeta",
+            "Si,Non"
+        );
+}
+
+function onConfirmRemoveCard(button) {
+    if (button == 1) {
         db.transaction(deleteCardDB, errorCB, successCB);
 
         loadCards();
