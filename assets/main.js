@@ -129,8 +129,17 @@ function createUlCardOperations(index) {
 }
 
 function initAppointment(index) {
-    calls = 0;
-    appointment(index);
+    if (isOnline()) {
+        calls = 0;
+        appointment(index);
+    } else {
+        navigator.notification.alert(
+                "Necesita estar conectado a Internet para poder solicitar unha cita",
+                null,
+                "Problema de conexión",
+                "Aceptar"
+            );
+    }
 }
 
 /*
@@ -537,4 +546,9 @@ function onConfirmRemoveCard(button) {
 
 function deleteCardDB(tx) {
     tx.executeSql("DELETE FROM CARD WHERE id='" + cards[selectedCard].id + "';");
+}
+
+function isOnline() {
+    var networkState = navigator.network.connection.type;
+    return (networkState != Connection.NONE);
 }
