@@ -221,7 +221,7 @@ function appointment(index) {
             } else {
                 $.mobile.hidePageLoadingMsg();
                 alert("Houbo un erro durante a solicitude de cita.\n" +
-                        "Revise os datos da tarxeta sanitaria e intenteo de novo mais tarde");
+                        "Revise os datos da tarxeta sanitaria e inténteo de novo máis tarde");
             }
 
         }
@@ -283,8 +283,8 @@ function showDayInfo() {
     $("#rango").val(rango);
 
     if (days[i][10] == 1) {
-        $("#alerta").val("O/a profesional non podera atenderlle o dia seleccionado.\n" +
-                "Remitiraselle a un/unha substituto/a");
+        $("#alerta").val("O/a profesional non poderá atenderlle o día seleccionado.\n" +
+                "Remitiráselle a un/unha substituto/a");
     }
 }
 
@@ -335,12 +335,12 @@ function requestAppointment() {
 
                 if ($(".p_cita", data).length == 11) {
                     message +=
-                            "Medico: " + $(".p_cita", data).eq(3).find("strong").text() + "\n" +
+                            "Médico: " + $(".p_cita", data).eq(3).find("strong").text() + "\n" +
                             "Data: " + $(".p_cita", data).eq(5).find("b").text() + "\n" +
                             "Hora: " + $(".p_cita", data).eq(7).find("strong").text();
                 } else {
                     message +=
-                        "Medico: " + $(".p_cita", data).eq(3).find("strong").text() + "\n" +
+                        "Médico: " + $(".p_cita", data).eq(3).find("strong").text() + "\n" +
                         "Substituindo a: " + $(".p_cita", data).eq(5).find("strong").text() + "\n" +
                         "Data: " + $(".p_cita", data).eq(7).find("b").text() + "\n" +
                         "Hora: " + $(".p_cita", data).eq(9).find("strong").text();
@@ -420,8 +420,8 @@ function confirmAppointment() {
             $.mobile.hidePageLoadingMsg();
 
             if ($(".p_cita_a", data).eq(1).text() == "") {
-                alert("Erro confirmando a cita, por favor inténteo de novo")
-            } {
+                alert("Erro confirmando a cita, por favor inténteo de novo");
+            } else {
                 alert($(".p_cita_a", data).eq(1).text());
             }
 
@@ -497,7 +497,7 @@ function newCard() {
 }
 
 function removeCard(index) {
-    if (confirm("¿Eliminar tarxeta " + cards[index].alias + "?")) {
+    if (confirm("¿Eliminar tarxeta \"" + cards[index].alias + "\"?")) {
         selectedCard = index;
 
         db.transaction(deleteCardDB, errorCB, successCB);
