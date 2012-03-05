@@ -46,6 +46,9 @@ var hours;
 // Hora seleccionada
 var selectedHour = 0;
 
+// Array de citas
+var appointments;
+
 
 function onDeviceReady() {
     db = window.openDatabase("CardsDB", "1.0", "Cards DataBase", 200000);
@@ -121,6 +124,8 @@ function createUlCardOperations(index) {
     var ul = $(document.createElement("ul"));
     ul.append($(document.createElement("li")).html(
             "<a onClick='initAppointment(" + index + ");'>Solicitar cita</a>"));
+    ul.append($(document.createElement("li")).html(
+            "<a onClick='initCheckAppointments(" + index + ");'>Consultar citas</a>"));
     ul.append($(document.createElement("li")).html(
             "<a onClick='editCard(" + index + ");'>Editar tarxeta</a>"));
     ul.append($(document.createElement("li")).html(
@@ -240,6 +245,122 @@ function appointment(index) {
         }
     );
 
+}
+
+function initCheckAppointments(index) {
+    if (isOnline()) {
+        calls = 0;
+        checkAppointments(index);
+    } else {
+        navigator.notification.alert(
+                "Necesita estar conectado a Internet para poder consultar as citas",
+                null,
+                "Problema de conexión",
+                "Aceptar"
+            );
+    }
+}
+
+function checkAppointments(index) {
+    $.mobile.showPageLoadingMsg();
+
+    console.log("Check appointments: " + cards[index].id + " Alias: " + cards[index].alias);
+
+    // Hai que facer as peticións por GET para que a aplicación non falle
+    $.get(BASE_URL + "inicioCI.asp", null,
+            function(data) {
+            }
+        );
+    $.get(BASE_URL + "paso2.asp?T=C", null,
+            function(data) {
+            }
+        );
+
+    var values = {
+        "n_cabecera": cards[index].n_cabecera,
+        "n_cuerpo": cards[index].n_cuerpo,
+        "t_apellidos1": cards[index].t_apellidos1,
+        "t_apellidos2": cards[index].t_apellidos2,
+        "t_control": cards[index].t_control,
+        "t_fecha": cards[index].t_fecha,
+        "t_sexo": cards[index].t_sexo
+    };
+
+    // Petición por post que simula encher o formulario cos datos da tarxeta
+    $.post(BASE_URL + "paso3.asp", values,
+        function(data) {
+
+            if ($("#menuOperaciones", data).text()) {
+                console.log("Pantalla inicial intento " + calls);
+                if (calls < MAX_CALLS) {
+                    console.log("Volver a intentar");
+                    calls++;
+                    checkAppointments(index);
+                    return;
+                }
+                console.log("Non máis intentos");
+            }
+
+            $.mobile.hidePageLoadingMsg();
+
+            var trs = $("tr[valign='middle']", data);
+            var number = trs.length;
+            if (number) {
+                $.mobile.changePage("#citas");
+
+                appointments = new Array();
+                for (i=0; i < number ; i++) {
+                    var tr = trs.eq(i);
+                    appointment = new Object();
+                    appointment.codCita = $("#codCita" + i, data).val();
+                    appointment.dia = $(".p_cita_az", tr).eq(0).text();
+                    appointment.hora = $(".p_cita_az", tr).eq(1).text();
+                    appointment.medico = $(".p_cita_az", tr).eq(3).text();
+                    appointment.centro = $(".p_cita_az", tr).eq(4).text();
+                    appointments[i] = appointment;
+                }
+
+                fillAppointmentsList();
+            } else {
+                if ($(".p_cita_a", data).length == 1) {
+                    navigator.notification.alert(
+                            "Non ten citas para os vindeiros días",
+                            null,
+                            "Sen citas",
+                            "Aceptar"
+                        );
+
+                    $.mobile.changePage("#inicio");
+                } else {
+                    navigator.notification.alert(
+                            "Revise os datos da tarxeta sanitaria e inténteo de novo máis tarde",
+                            null,
+                            "Erro durante a consulta",
+                            "Aceptar"
+                        );
+                }
+            }
+
+        }
+    );
+
+}
+
+function fillAppointmentsList() {
+    var list = $("#lista_citas");
+    list.html("");
+
+    for ( var i = 0; i < appointments.length; i++) {
+        list.append(createLiAppointment(i));
+    }
+    list.listview("destroy").listview();
+}
+
+function createLiAppointment(index) {
+    var li = $(document.createElement("li"));
+    li.append($(document.createElement("h3")).html(appointments[index].dia + " - " + appointments[index].hora));
+    li.append($(document.createElement("p")).html("<strong>" + appointments[index].medico + "</strong><br />" + appointments[index].centro));
+    return li
 }
 
 function updateDays() {
