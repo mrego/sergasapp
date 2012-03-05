@@ -88,18 +88,57 @@
             </div>
 
             <div data-role="content">
-                <label for="alias">Alias tarxeta</label><input id="alias" type="text" />
+                <div class="ui-body ui-body-a">
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('alias');">Axuda</a>
+                        <label for="alias">Alias tarxeta</label>
+                        <input id="alias" type="text" />
+                    </div>
+                </div>
 
-                <label for="t_fecha">Data de nacemento</label><input id="t_fecha" type="text" maxlength="6" />
-                <label for="t_apellidos1">Iniciais 1</label><input id="t_apellidos1" type="text" maxlength="2" />
-                <label for="t_apellidos2">Iniciais 2</label><input id="t_apellidos2" type="text" maxlength="2" />
-                <label for="t_sexo">Sexo</label><input id="t_sexo" type="text" maxlength="1" />
-                <label for="t_control">Control</label><input id="t_control" type="text" maxlength="3" />
+                <div class="ui-body ui-body-b">
+                    <h3>Datos da tarxeta sanitaria</h3>
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('t_fecha');">Axuda</a>
+                        <label for="t_fecha">Data de nacemento</label>
+                        <input id="t_fecha" type="text" maxlength="6" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('t_apellidos1');">Axuda</a>
+                        <label for="t_apellidos1">Iniciais 1</label>
+                        <input id="t_apellidos1" type="text" maxlength="2" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('t_apellidos2');">Axuda</a>
+                        <label for="t_apellidos2">Iniciais 2</label>
+                        <input id="t_apellidos2" type="text" maxlength="2" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('t_sexo');">Axuda</a>
+                        <label for="t_sexo">Sexo</label>
+                        <input id="t_sexo" type="text" maxlength="1" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('t_control');">Axuda</a>
+                        <label for="t_control">Control</label>
+                        <input id="t_control" type="text" maxlength="3" />
+                    </div>
 
-                <label for="n_cabecera">Cabeciera SS</label><input id="n_cabecera" type="text" maxlength="2" />
-                <label for="n_cuerpo">Corpo SS</label><input id="n_cuerpo" type="text" maxlength="10" />
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('n_cabecera');">Axuda</a>
+                        <label for="n_cabecera">Cabeciera SS</label>
+                        <input id="n_cabecera" type="text" maxlength="2" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('n_cuerpo');">Axuda</a>
+                        <label for="n_cuerpo">Corpo SS</label>
+                        <input id="n_cuerpo" type="text" maxlength="10" />
+                    </div>
+                </div>
 
-                <a onClick="saveCard();" data-role="button" data-icon="check">Gardar</a>
+                <div class="ui-body ui-body-c">
+                    <a onClick="saveCard();" data-role="button" data-icon="check">Gardar</a>
+                </div>
             </div>
 
         </div>

@@ -673,3 +673,64 @@ function isOnline() {
     var networkState = navigator.network.connection.type;
     return (networkState != Connection.NONE);
 }
+
+function help(field) {
+    var message;
+    var title;
+
+    switch (field) {
+        case "alias":
+            title = "Alias tarxeta";
+            message = "Nome para indentificar a tarxeta sanitaria na aplicación SergasApp";
+            break;
+        case "t_fecha":
+            title = "Data de nacemento";
+            message = "6 primeiros díxitos da tarxeta\n\n" +
+                    "Representan a data de nacemento co seguinte formato \"AAMMDD\"\n\n" +
+                    "Exemplo: \"25 de marzo de 1971\" sería \"710325\"";
+            break;
+        case "t_apellidos1":
+            title = "Iniciais 1";
+            message = "2 letras despois dos primeiros 6 números da tarxeta\n\n" +
+                    "Iniciais dos dous apelidos\n\n" +
+                    "Exemplo: \"García Pérez\" sería \"GP\"";
+            break;
+        case "t_apellidos2":
+            title = "Iniciais 2";
+            message = "Seguintes 2 letras despois das iniciais dos apelidos da tarxeta\n\n" +
+                    "Segunda letra dos dous apelidos\n\n" +
+                    "Exemplo: \"García Pérez\" sería \"AE\"";
+            break;
+        case "t_sexo":
+            title = "Sexo";
+            message = "Seguinte díxito da tarxeta despois das letras dos apelidos\n\n" +
+                    "Representa o sexo cun número (0: mulller, 1: home)\n\n" +
+                    "Exemplo: \"muller\" sería \"0\"";
+            break;
+        case "t_control":
+            title = "Control";
+            message = "Seguintes 3 números da tarxeta despois do díxito de sexo\n\n" +
+                    "É un número de control de erros\n\n" +
+                    "Exemplo: \"027\"";
+            break;
+        case "n_cabecera":
+            title = "Cabeciera SS";
+            message = "Primeiros 2 díxitos antes da barra na tarxeta\n\n" +
+                    "Son os primeros díxitos do número da Seguridade Social (representan a provincia)\n\n" +
+                    "Exemplo: \"Pontevedra\" sería \"36\"";
+            break;
+        case "n_cuerpo":
+            title = "Corpo SS";
+            message = "10 díxitos despois da barra na tarxeta\n\n" +
+                    "Son os díxitos restantes do número da Seguridade Social\n\n" +
+                    "Exemplo: \"1234567890\"";
+            break;
+    }
+
+    navigator.notification.alert(
+            message,
+            null,
+            "Axuda: " + title,
+            "Cerrar"
+        );
+}
