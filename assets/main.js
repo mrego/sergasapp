@@ -531,6 +531,7 @@ function fillHours() {
     }
 
     hora.select(selectedHour);
+    hora.selectmenu("refresh");
 }
 
 function showHourInfo() {
