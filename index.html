@@ -23,13 +23,14 @@
 
             <div data-role="header">
                 <h1>SergasApp</h1>
-                <div class="ui-body ui-body-b">
-                    <a onClick="newCard();" data-role="button" data-icon="plus">Nova tarxeta</a>
-                </div>
             </div>
 
             <div data-role="content">
                 <ul data-role="listview" id="lista"></ul>
+            </div>
+
+            <div data-role="footer" class="ui-bar">
+                <a onClick="newCard();" data-role="button" data-icon="plus" class="ui-body-b">Engadir tarxeta</a>
             </div>
 
         </div>
@@ -88,7 +89,7 @@
             </div>
 
             <div data-role="content">
-                <div class="ui-body ui-body-a">
+                <div class="ui-body ui-body-b">
                     <div data-role="fieldcontain">
                         <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('alias');">Axuda</a>
                         <label for="alias">Alias tarxeta</label>
@@ -96,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="ui-body ui-body-b">
+                <div class="ui-body ui-body-c">
                     <h3>Datos da tarxeta sanitaria</h3>
                     <div data-role="fieldcontain">
                         <a data-role="button" data-icon="info" data-iconpos="notext" style="float: right;" onClick="help('t_fecha');">Axuda</a>
@@ -136,9 +137,10 @@
                     </div>
                 </div>
 
-                <div class="ui-body ui-body-c">
-                    <a onClick="saveCard();" data-role="button" data-icon="check">Gardar</a>
-                </div>
+            </div>
+
+            <div data-role="footer" class="ui-bar">
+                <a onClick="saveCard();" data-role="button" data-icon="check" class="ui-body-b">Gardar</a>
             </div>
 
         </div>
