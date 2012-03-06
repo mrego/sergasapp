@@ -672,7 +672,7 @@ function deleteCardDB(tx) {
 
 function isOnline() {
     var networkState = navigator.network.connection.type;
-    return (networkState != Connection.NONE);
+    return (networkState != null) && (networkState != Connection.NONE);
 }
 
 function help(field) {
