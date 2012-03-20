@@ -136,7 +136,7 @@ function createUlCardOperations(index) {
 function initAppointment(index) {
     if (isOnline()) {
         calls = 0;
-        appointment(index);
+        startRequestAppointment(index);
     } else {
         navigator.notification.alert(
                 "Necesita estar conectado a Internet para poder solicitar unha cita",
@@ -153,7 +153,7 @@ function initAppointment(index) {
  *
  * Por iso se utiliza a variable "calls" que conta os intentos de conexión.
  */
-function appointment(index) {
+function startRequestAppointment(index) {
     $.mobile.showPageLoadingMsg();
 
     console.log("Appointment: " + cards[index].id + " Alias: " + cards[index].alias);
@@ -195,7 +195,7 @@ function appointment(index) {
                 if (calls < MAX_CALLS) {
                     console.log("Volver a intentar");
                     calls++;
-                    appointment(index);
+                    startRequestAppointment(index);
                     return;
                 }
                 console.log("Non máis intentos");
