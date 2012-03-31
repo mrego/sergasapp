@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
     xmlns:gap="http://phonegap.com/ns/1.0"
-    id="com.igalia.rego.phonegap.citasergas"
-    version="0.0.1">
+    id="com.igalia.phonegap.sergasapp"
+    version="0.1.0">
 
     <name>SergasApp</name>
 
     <description>
-        Aplicación que permite a solicitude de citas médicas no SERGAS (Servizo Galego de Saúde).
+        Aplicación que permite a solicitude/consulta/cancelación de citas médicas no SERGAS (Servizo Galego de Saúde).
     </description>
 
     <author href="http://blogs.igalia.com/mrego/" email="rego@igalia.com">
