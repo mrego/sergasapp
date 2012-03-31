@@ -49,6 +49,9 @@ var selectedHour = 0;
 // Array de citas
 var appointments;
 
+// Cita seleccionada
+var selectedAppointment = null;
+
 
 function onDeviceReady() {
     db = window.openDatabase("CardsDB", "1.0", "Cards DataBase", 200000);
@@ -360,7 +363,54 @@ function createLiAppointment(index) {
     var li = $(document.createElement("li"));
     li.append($(document.createElement("h3")).html(appointments[index].dia + " - " + appointments[index].hora));
     li.append($(document.createElement("p")).html("<strong>" + appointments[index].medico + "</strong><br />" + appointments[index].centro));
-    return li
+    li.append(createUlAppointmentOperations(index));
+    return li;
+}
+
+function createUlAppointmentOperations(index) {
+    var ul = $(document.createElement("ul"));
+    ul.append($(document.createElement("li")).html(
+            "<a onClick='cancelAppointment(" + index + ");'>Cancelar cita</a>"));
+    return ul;
+}
+
+function cancelAppointment(index) {
+    selectedAppointment = index;
+
+    navigator.notification.confirm(
+        "¿Está seguro?",
+        onConfirmCancelAppointment,
+        "Cancelar cita",
+        "Si,Non"
+    );
+}
+
+function onConfirmCancelAppointment(button) {
+    if (button == 1) {
+        var values = {
+            "codCitas": appointments[selectedAppointment].codCita
+        };
+
+        $.post(BASE_URL + "marcoListadoCitasElim.asp", values,
+            function(data) {
+                var params = $("#codCita0", data).val();
+                params += "," + $("#codServicio0", data).val();
+                params += "," + $("#hora0", data).val();
+                params += "," + $("#fecha0", data).val();
+                params += "," + $("#forzar0", data).val();
+
+                var values = {
+                        "nParams": 1,
+                        "parametros": params
+                };
+
+                $.post(BASE_URL + "cancelarCita.asp", values);
+
+                loadCards();
+                $.mobile.changePage("#inicio");
+            }
+        );
+    }
 }
 
 function updateDays() {
