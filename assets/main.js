@@ -25,6 +25,9 @@ var BASE_URL = "https://extranet.sergas.es/cita/"
 // Número máximo de veces que se intenta facer a conexión
 var MAX_CALLS = 3;
 
+// Modo de depuración
+var DEBUG = false;
+
 // Contador de intentos de conexión
 var calls = 0;
 
@@ -76,11 +79,11 @@ function populateDB(tx) {
 }
 
 function errorCB(tx, err) {
-    console.log("Error processing SQL: " + err);
+    log("Error processing SQL: " + err);
 }
 
 function successCB() {
-    console.log("DB success");
+    log("DB success");
 }
 
 function loadCards() {
@@ -95,12 +98,12 @@ function cardsSuccess(tx, results) {
     cards = new Array();
 
     var len = results.rows.length;
-    console.log("Rows: " + len);
+    log("Rows: " + len);
 
     for ( var i = 0; i < len; i++) {
         var item = results.rows.item(i);
         cards[i] = item;
-        console.log("ID: " + item.id + " Alias: " + item.alias);
+        log("ID: " + item.id + " Alias: " + item.alias);
     }
 
     fillCardsList();
@@ -159,7 +162,7 @@ function initAppointment(index) {
 function startRequestAppointment(index) {
     $.mobile.showPageLoadingMsg();
 
-    console.log("Appointment: " + cards[index].id + " Alias: " + cards[index].alias);
+    log("Appointment: " + cards[index].id + " Alias: " + cards[index].alias);
 
     // Hai que facer as peticións por GET para que a aplicación non falle
     $.get(BASE_URL + "inicioCI.asp", null,
@@ -181,27 +184,27 @@ function startRequestAppointment(index) {
         "t_sexo": cards[index].t_sexo
     };
 
-    console.log("n_cabecera: " + values.n_cabecera);
-    console.log("n_cuerpo: " + values.n_cuerpo);
-    console.log("t_apellidos1: " + values.t_apellidos1);
-    console.log("t_apellidos2: " + values.t_apellidos2);
-    console.log("t_control: " + values.t_control);
-    console.log("t_fecha: " + values.t_fecha);
-    console.log("t_sexo: " + values.t_sexo);
+    log("n_cabecera: " + values.n_cabecera);
+    log("n_cuerpo: " + values.n_cuerpo);
+    log("t_apellidos1: " + values.t_apellidos1);
+    log("t_apellidos2: " + values.t_apellidos2);
+    log("t_control: " + values.t_control);
+    log("t_fecha: " + values.t_fecha);
+    log("t_sexo: " + values.t_sexo);
 
     // Petición por post que simula encher o formulario cos datos da tarxeta
     $.post(BASE_URL + "paso3.asp", values,
         function(data) {
 
             if ($("#menuOperaciones", data).text()) {
-                console.log("Pantalla inicial intento " + calls);
+                log("Pantalla inicial intento " + calls);
                 if (calls < MAX_CALLS) {
-                    console.log("Volver a intentar");
+                    log("Volver a intentar");
                     calls++;
                     startRequestAppointment(index);
                     return;
                 }
-                console.log("Non máis intentos");
+                log("Non máis intentos");
             }
 
             if ($(".p_cita_a", data).length) {
@@ -209,9 +212,9 @@ function startRequestAppointment(index) {
 
                 $.mobile.changePage("#solicitude_cita");
 
-                console.log("Number: " + $(".p_cita_a", data).length);
-                console.log("Médico: " + $(".p_cita_a", data).first().text());
-                console.log("Centro: " + $(".p_cita_a", data).last().text());
+                log("Number: " + $(".p_cita_a", data).length);
+                log("Médico: " + $(".p_cita_a", data).first().text());
+                log("Centro: " + $(".p_cita_a", data).last().text());
 
                 $("#medico").val($(".p_cita_a", data).first().text());
                 $("#centro").val($(".p_cita_a", data).last().text());
@@ -221,7 +224,7 @@ function startRequestAppointment(index) {
 
                 $("#s_fecha", data).children().each(function(index) {
                     if ($(this).attr("value")) {
-                        console.log($(this).attr("value"));
+                        log($(this).attr("value"));
 
                         // A estructura que se parsea ten o seguinte formatio:
                         // diaselecSTR = dias(i)|hMinimasDEM(i)|lDias(i)|lMeses(i)|lAnhos(i)|hMinimasADM(i)|hMaximasADM(i)|hMinimasDEM(i)|hMaximasDEM(i)|i|fTipoDistribucion(i)
@@ -230,7 +233,7 @@ function startRequestAppointment(index) {
                         // Exemplo: xoves, 19 de xaneiro|09:00|19|1|2012|09:38|13:22|09:00|13:29|10|2
                         days.push($(this).attr("value").split("|"));
                     } else {
-                        console.log("Without value at index: " + index);
+                        log("Without value at index: " + index);
                     }
                 });
 
@@ -267,7 +270,7 @@ function initCheckAppointments(index) {
 function checkAppointments(index) {
     $.mobile.showPageLoadingMsg();
 
-    console.log("Check appointments: " + cards[index].id + " Alias: " + cards[index].alias);
+    log("Check appointments: " + cards[index].id + " Alias: " + cards[index].alias);
 
     // Hai que facer as peticións por GET para que a aplicación non falle
     $.get(BASE_URL + "inicioCI.asp", null,
@@ -294,14 +297,14 @@ function checkAppointments(index) {
         function(data) {
 
             if ($("#menuOperaciones", data).text()) {
-                console.log("Pantalla inicial intento " + calls);
+                log("Pantalla inicial intento " + calls);
                 if (calls < MAX_CALLS) {
-                    console.log("Volver a intentar");
+                    log("Volver a intentar");
                     calls++;
                     checkAppointments(index);
                     return;
                 }
-                console.log("Non máis intentos");
+                log("Non máis intentos");
             }
 
             $.mobile.hidePageLoadingMsg();
@@ -463,7 +466,7 @@ function showDayInfo() {
         $("#hora").val(days[i][7].split(":")[0]);
         $("#minutos").val(days[i][7].split(":")[1]);
     }
-    console.log("Rango: " + rango);
+    log("Rango: " + rango);
     $("#rango").val(rango);
 
     if (days[i][10] == 1) {
@@ -498,14 +501,14 @@ function requestAppointment() {
         "tipoDistrib": days[i][10]
     };
 
-    console.log("fecha: " + values.fecha);
-    console.log("fechaIdonea: " + values.fechaIdonea);
-    console.log("fechausa: " + values.fechausa);
-    console.log("hora: " + values.hora);
-    console.log("indiceDia: " + values.indiceDia);
-    console.log("minutos: " + values.minutos);
-    console.log("tipoActoCI: " + values.tipoActoCI);
-    console.log("tipoDistrib: " + values.tipoDistrib);
+    log("fecha: " + values.fecha);
+    log("fechaIdonea: " + values.fechaIdonea);
+    log("fechausa: " + values.fechausa);
+    log("hora: " + values.hora);
+    log("indiceDia: " + values.indiceDia);
+    log("minutos: " + values.minutos);
+    log("tipoActoCI: " + values.tipoActoCI);
+    log("tipoDistrib: " + values.tipoDistrib);
 
     $.mobile.showPageLoadingMsg();
 
@@ -549,8 +552,8 @@ function requestAppointment() {
                 var i = 0;
 
                 $("#s_hora", data).children().each(function(index) {
-                    console.log("Value: " + $(this).attr("value"));
-                    console.log("Selected: " + $(this).attr("selected"));
+                    log("Value: " + $(this).attr("value"));
+                    log("Selected: " + $(this).attr("selected"));
 
                     // A estructura que se parsea ten o seguinte formatio:
                     // hCitaArr = hora|codHueco1|nomprof & " " & apel1prof & " " & apel2prof|codcentro|nomcons
@@ -600,8 +603,8 @@ function confirmAppointment() {
             "horaCita": hours[i][0]
         };
 
-    console.log("codHueco: " + values.codHueco);
-    console.log("horaCita: " + values.horaCita);
+    log("codHueco: " + values.codHueco);
+    log("horaCita: " + values.horaCita);
 
     $.mobile.showPageLoadingMsg();
 
@@ -784,4 +787,10 @@ function help(field) {
             "Axuda: " + title,
             "Cerrar"
         );
+}
+
+function log(message) {
+    if (DEBUG) {
+        console.log(message);
+    }
 }
