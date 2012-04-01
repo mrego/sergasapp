@@ -7,7 +7,7 @@
     <name>SergasApp</name>
 
     <description>
-        Aplicación que permite a solicitude/consulta/cancelación de citas médicas no SERGAS (Servizo Galego de Saúde).
+        Aplicación non oficial que permite a solicitude, consulta e cancelación de citas de atención primaria no SERGAS (Servizo Galego de Saúde).
     </description>
 
     <author href="http://blogs.igalia.com/mrego/" email="rego@igalia.com">

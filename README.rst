@@ -4,8 +4,9 @@ SergasApp
 Descrición
 ----------
 
-**SergasApp** é unha pequena aplicación para a solicitude de citas médicas no
-SERGAS (Servizo Galego de Saúde).
+**SergasApp** é unha pequena aplicación *non oficial* para a solicitude,
+consulta e cancelación de citas de atención primaria no `SERGAS (Servizo Galego
+de Saúde) <http://www.sergas.es>`_.
 
 A aplicación atópase nun *estado experimental* e ten dispoñibles as seguintes
 opcións:
