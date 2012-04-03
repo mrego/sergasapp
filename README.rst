@@ -25,8 +25,8 @@ Dispoñibilidade
 O código fonte da aplicación está dispoñible no repositorio Git en
 http://github.com/mrego/sergasapp
 
-A aplicación compilada para as distintas plataformas pode descargarse de
-https://build.phonegap.com/apps/77977
+Podedes atopar máis información sobre a aplicación na súa páxina web:
+http://mrego.github.com/sergasapp/
 
 Licenza
 -------
