@@ -31,7 +31,7 @@ https://build.phonegap.com/apps/77977
 Licenza
 -------
 
-**SergasApp** está publicado baixo os termos da *Licenza Pública Xeral de GNU
+**SergasApp** está publicada baixo os termos da *Licenza Pública Xeral de GNU
 versión 3* (`GNU General Public License version 3
 <http://www.gnu.org/copyleft/gpl.html>`_).
 
