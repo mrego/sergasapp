@@ -321,6 +321,7 @@ function checkAppointments(index) {
                     appointment.codCita = $("#codCita" + i, data).val();
                     appointment.dia = $(".p_cita_az", tr).eq(0).text();
                     appointment.hora = $(".p_cita_az", tr).eq(1).text();
+                    appointment.tipo = $(".p_cita_az", tr).eq(2).text();
                     appointment.medico = $(".p_cita_az", tr).eq(3).text();
                     appointment.centro = $(".p_cita_az", tr).eq(4).text();
                     appointments[i] = appointment;
@@ -365,7 +366,9 @@ function fillAppointmentsList() {
 function createLiAppointment(index) {
     var li = $(document.createElement("li"));
     li.append($(document.createElement("h3")).html(appointments[index].dia + " - " + appointments[index].hora));
-    li.append($(document.createElement("p")).html("<strong>" + appointments[index].medico + "</strong><br />" + appointments[index].centro));
+    li.append($(document.createElement("p")).html("<strong>" + appointments[index].medico +
+            "</strong><br /><em>" + appointments[index].tipo +
+            "</em><br />"+ appointments[index].centro));
     li.append(createUlAppointmentOperations(index));
     return li;
 }
