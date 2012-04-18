@@ -430,11 +430,20 @@ function fillDays() {
 
     dia.change(showDayInfo);
 
+    var firstAvailableDay = null;
+
     for (var i = 0; i < days.length; i++) {
         if (checkDayAvailability(i)) {
+            if (!firstAvailableDay) {
+                firstAvailableDay = i;
+            }
             dia.append("<option value='" + i + "'>" + days[i][0] +"</option>");
         }
     }
+
+    dia.select(firstAvailableDay);
+    dia.selectmenu("refresh");
+    showDayInfo();
 }
 
 function checkDayAvailability(index) {
