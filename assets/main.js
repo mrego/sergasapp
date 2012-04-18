@@ -558,6 +558,7 @@ function requestAppointment() {
                 $("#centro2").val($(".p_cita", data).eq(6).text());
                 $("#medico2").val($(".p_cita", data).eq(7).find("strong").text());
                 $("#dia2").val($(".p_cita", data).eq(10).find("strong").text());
+                $("#tipo2").val($(".p_cita", data).eq(12).find("strong").eq(0).text());
 
                 hours = new Array();
 
