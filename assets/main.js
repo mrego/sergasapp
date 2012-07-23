@@ -57,10 +57,18 @@ var selectedAppointment = null;
 
 
 function onDeviceReady() {
+    hideCloseLinkIfNotAndroid();
+
     db = window.openDatabase("CardsDB", "1.0", "Cards DataBase", 200000);
     db.transaction(populateDB, errorCB, successCB);
 
     loadCards();
+}
+
+function hideCloseLinkIfNotAndroid() {
+    if (device.platform != "Android") {
+        $("#link_salir").hide();
+    }
 }
 
 function populateDB(tx) {
@@ -806,4 +814,8 @@ function log(message) {
     if (DEBUG) {
         console.log(message);
     }
+}
+
+function exitApp() {
+    device.exitApp();
 }
