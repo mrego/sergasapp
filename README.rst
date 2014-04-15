@@ -4,20 +4,24 @@ SergasApp
 Descrición
 ----------
 
-**SergasApp** é unha pequena aplicación *non oficial* para a solicitude,
+**SergasApp** era unha pequena aplicación *non oficial* para a solicitude,
 consulta e cancelación de citas de atención primaria no `SERGAS (Servizo Galego
 de Saúde) <http://www.sergas.es>`_.
 
-A aplicación atópase nun *estado experimental* e ten dispoñibles as seguintes
-opcións:
+A aplicación dispoñía das seguintes opcións:
 
 * Solicitude de citas
 * Consulta de citas
 * Cancelación de citas
 * Xestión de varias tarxetas sanitarias
 
-A aplicación está desenvolvida utilizando `PhoneGap <http://phonegap.com/>`_,
+A aplicación foi desenvolvida utilizando `PhoneGap <http://phonegap.com/>`_,
 `jQuery <http://jquery.com/>`_ e `jQuery Mobile <http://jquerymobile.com/>`_.
+
+Na actualidade a aplicación non funciona debido ós últimos cambios na web do
+SERGAS. Foi publicada unha aplicación alternativa chamada **SergasApp 2** que
+está dispoñible na seguinte URL:
+https://bitbucket.org/TurryBoeing/sergasapp
 
 Dispoñibilidade
 ---------------
